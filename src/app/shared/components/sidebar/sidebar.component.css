@@ -1,0 +1,21 @@
+.mat-icon{
+   vertical-align: middle;
+   margin-right: 10px; } 
+   
+
+
+.profile-card{
+   text-align: center;
+   height: 120px;
+  }
+
+img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+       }
+
+.List-item-active {
+   color: red;
+} 
