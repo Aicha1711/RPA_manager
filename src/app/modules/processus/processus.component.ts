@@ -3,6 +3,9 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
+import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdialog.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
   
 export interface PeriodicElement {
   name: string;
@@ -45,6 +48,7 @@ export class ProcessusComponent implements OnInit {
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
   selectedRow: any;
+   
 
   logData(row: any){ 
     this.selectedRow = row;
@@ -55,7 +59,7 @@ export class ProcessusComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
     
-  constructor() {}
+  constructor(public dialog:MatDialog) {}
     
   
   ngOnInit() {
@@ -93,6 +97,13 @@ checkboxLabel(row?: PeriodicElement): string {
   }
   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
 }
+
+openDialog(){
+
+this.dialog.open(ProcessdialogComponent);
+
+}
+
 }
   
 

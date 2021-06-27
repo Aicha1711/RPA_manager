@@ -20,6 +20,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdialog.component';
 
  
 @NgModule({
@@ -47,9 +49,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     MatSortModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule
   ],
-
+   entryComponents:[ProcessdialogComponent],
 })
 export class DefaultModule { }
 
