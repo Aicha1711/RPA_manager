@@ -22,6 +22,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdialog.component';
+import { DialogModule } from 'src/app/dialog/dialog.module';
+
 
  
 @NgModule({
@@ -39,6 +41,7 @@ import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdial
     CommonModule,
     RouterModule,
     SharedModule,
+    DialogModule,
     MatSidenavModule,
     MatDividerModule,
     MatToolbarModule,
@@ -50,7 +53,8 @@ import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdial
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+  
   ],
    entryComponents:[ProcessdialogComponent],
 })

@@ -5,6 +5,14 @@ import { PostsdialogComponent } from './postsdialog/postsdialog.component';
 import { EnvironnementdialogComponent } from './environnementdialog/environnementdialog.component';
 import { JobsdialogComponent } from './jobsdialog/jobsdialog.component';
 import { ProcessdialogComponent } from './processdialog/processdialog.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import {MatDialogModule } from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 
@@ -14,10 +22,25 @@ import { ProcessdialogComponent } from './processdialog/processdialog.component'
     JobsdialogComponent,
     EnvironnementdialogComponent,
     PostsdialogComponent,
-    RobotsdialogComponent
+    RobotsdialogComponent,
+    
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatDividerModule
+    
+
+    
   ]
+
+  
 })
 export class DialogModule { }

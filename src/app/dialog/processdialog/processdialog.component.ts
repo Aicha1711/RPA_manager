@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl,Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-processdialog',
@@ -11,5 +12,7 @@ export class ProcessdialogComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  selectFormControl = new FormControl('', Validators.required);
+ 
 
 }

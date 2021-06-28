@@ -1,1 +1,51 @@
-<p>processdialog works!</p>
+<div class="modal-process">
+  <mat-card>Deploy a process</mat-card>
+<mat-divider></mat-divider>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput
+            placeholder="Process Name">
+    </mat-form-field>
+
+    
+ <mat-form-field appearance="standard">
+  <mat-label>Select the Environnement</mat-label>
+  <select matNativeControl required [formControl]="selectFormControl">
+    <option label="--select Environnement --"></option>
+    <option value="saab">env1</option>
+    <option value="mercedes">env2</option>
+  </select>
+  <mat-error *ngIf="selectFormControl.hasError('required')">
+    This field is required
+  </mat-error>
+</mat-form-field>
+
+
+<mat-form-field appearance="fill" class="select-priority">
+  
+  <mat-label>Select the priority</mat-label>
+  <mat-select>
+    <mat-option value="low">low</mat-option>
+    <mat-option value="high">high</mat-option>
+
+  </mat-select>
+</mat-form-field>
+
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Descrition</mat-label>
+    <input matInput #message maxlength="256" placeholder="Ex. Finance process includes ...">
+    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+  </mat-form-field>
+
+
+
+</mat-dialog-content> 
+
+
+<mat-dialog-actions>
+    <button class="mat-raised-button">cancel</button>
+    <button class="mat-raised-button mat-primary">create</button>
+</mat-dialog-actions>
+ </div>

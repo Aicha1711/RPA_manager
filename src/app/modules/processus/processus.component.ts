@@ -4,7 +4,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdialog.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 
   
 export interface PeriodicElement {
@@ -99,8 +99,8 @@ checkboxLabel(row?: PeriodicElement): string {
 }
 
 openDialog(){
-
-this.dialog.open(ProcessdialogComponent);
+  
+ this.dialog.open(ProcessdialogComponent);
 
 }
 
