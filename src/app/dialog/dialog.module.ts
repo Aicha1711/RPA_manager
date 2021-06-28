@@ -16,6 +16,10 @@ import {MatDividerModule} from '@angular/material/divider';
 
 
 
+
+
+
+
 @NgModule({
   declarations: [
     ProcessdialogComponent,
@@ -36,7 +40,7 @@ import {MatDividerModule} from '@angular/material/divider';
     ReactiveFormsModule,
     MatCardModule,
     MatDividerModule
-    
+  
 
     
   ]

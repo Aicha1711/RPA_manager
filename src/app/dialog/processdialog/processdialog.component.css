@@ -13,7 +13,7 @@
 .mat-form-field {
     padding-top: 10px;
     display: block;
-    font-size: 16px;}
+    font-size: 14px;}
 
 .mat-dialog-actions{
   
@@ -28,4 +28,7 @@
     
 }
 
-
+.input-file{
+    padding-top: 30px;
+    padding-left: 5px;
+}

@@ -3,6 +3,12 @@
 <mat-divider></mat-divider>
 
 <mat-dialog-content>
+  
+  <div class="input-file">
+    <mat-label class="label-process">Package name : </mat-label> <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>.nupkg
+    <input  hidden (change)="onFileSelected()" #fileInput type="file" id="file">  
+  </div>
+  
   <mat-form-field>
     <input matInput
             placeholder="Process Name">
