@@ -23,6 +23,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdialog.component';
 import { DialogModule } from 'src/app/dialog/dialog.module';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 
  
@@ -35,6 +38,7 @@ import { DialogModule } from 'src/app/dialog/dialog.module';
     JobsComponent,
     ProcessusComponent,
     RobotsComponent,
+
   ],
 
   imports: [
@@ -54,6 +58,8 @@ import { DialogModule } from 'src/app/dialog/dialog.module';
     MatPaginatorModule,
     MatCheckboxModule,
     MatDialogModule,
+    HttpClientModule,
+  
   
   ],
    entryComponents:[ProcessdialogComponent],

@@ -1,1 +1,21 @@
-<p>robots works!</p>
+<mat-toolbar>
+  <h1>Robots</h1>
+  </mat-toolbar>
+  <table class="table table-striped">
+    <thead>
+        
+        <th> Name</th>
+        <th> Ip adress</th>
+        <th> port</th>
+        <th> creted at</th>
+    </thead>
+    <tbody>
+  <tr *ngFor="let robot of robots">
+    
+    <td>{{robot.name}}</td>
+    <td>{{robot.ipAddress}}</td>
+    <td>{{robot.port}}</td>
+    <td>{{robot.createdAt}}</td>
+  </tr>
+</tbody>
+</table>
