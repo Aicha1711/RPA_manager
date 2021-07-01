@@ -24,7 +24,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdialog.component';
 import { DialogModule } from 'src/app/dialog/dialog.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { RobotsdialogComponent } from 'src/app/dialog/robotsdialog/robotsdialog.component';
 
 
 
@@ -38,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     JobsComponent,
     ProcessusComponent,
     RobotsComponent,
+ 
 
   ],
 
@@ -62,7 +63,7 @@ import { HttpClientModule } from '@angular/common/http';
   
   
   ],
-   entryComponents:[ProcessdialogComponent],
+   entryComponents:[ProcessdialogComponent,RobotsdialogComponent],
 })
 export class DefaultModule { }
 

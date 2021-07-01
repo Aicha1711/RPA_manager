@@ -8,7 +8,6 @@ import { Robot } from '../modules/robots/robot';
 })
 export class RobotsService {
 
-  
 
   constructor(private http: HttpClient) { }
 
