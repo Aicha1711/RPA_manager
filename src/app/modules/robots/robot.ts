@@ -3,11 +3,14 @@ export class Robot {
          
     position :number; 
           id : number;
-          name : String;
           ipAddress : String;
           port :number;
+          domain : String;
+          psw : String;
+          name : String;
+          description : String;
           statut : boolean;
-          createdAt :Date;
+          
   
   
 }

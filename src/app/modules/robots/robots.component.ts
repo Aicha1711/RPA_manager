@@ -20,7 +20,7 @@ import { MatDialog,MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/di
 export class RobotsComponent implements OnInit {
   
   RobotData: any=[];
-  displayedColumns: string[] = ['select','position','name','ipAddress','port','createdAt','statut'];
+  displayedColumns: string[] = ['select','position','name','description','domain','statut'];
   dataSource: MatTableDataSource<Robot>;
   selection = new SelectionModel<Robot>(true, []);
   
@@ -30,7 +30,7 @@ export class RobotsComponent implements OnInit {
 
 
   
-  constructor( private robotService: RobotsService,public dialog: MatDialog) {} 
+  constructor( private robotService: RobotsService, public dialog: MatDialog) {} 
 
     
   

@@ -15,10 +15,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatTabsModule} from '@angular/material/tabs';
+import { MatIconModule} from '@angular/material/icon';
+import { MatDividerModule} from '@angular/material/divider';
+import { MatStepperModule} from '@angular/material/stepper';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 
@@ -53,7 +55,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatTabsModule,
     MatIconModule,
     MatDividerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatProgressBarModule
     
    
     
