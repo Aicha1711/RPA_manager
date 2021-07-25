@@ -28,6 +28,7 @@ import { RobotsdialogComponent } from 'src/app/dialog/robotsdialog/robotsdialog.
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatListModule } from '@angular/material/list';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -68,7 +69,8 @@ import { MatListModule } from '@angular/material/list';
     HttpClientModule,
     MatCardModule,
     MatProgressBarModule,
-    MatListModule,    
+    MatListModule,  
+    MatSnackBarModule  
   
   
   ],

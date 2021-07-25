@@ -9,12 +9,15 @@ import { PackagesService } from 'src/app/services/packages.service';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
+  
   currentFile?: File;
   progress = 0;
   message = '';
 
   fileName = 'Select File';
   fileInfos?: Observable<any>;
+
+
 
   constructor(private packageService: PackagesService ) { }
 
@@ -32,7 +35,6 @@ export class PostsComponent implements OnInit {
       this.fileName = 'Select File';
     }
   }
-
   upload(): void {
     this.progress = 0;
     this.message = "";
@@ -62,6 +64,9 @@ export class PostsComponent implements OnInit {
     }
 
   }
+
+
+
 }
   
 

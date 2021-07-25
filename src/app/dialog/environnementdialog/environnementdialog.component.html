@@ -9,20 +9,23 @@
     
     <mat-form-field>
       <input matInput
-              placeholder="Environnement Name">
+              placeholder="Environnement Name"  required  [(ngModel)]="environnement.name">
       </mat-form-field>
   
       <mat-form-field appearance="fill">
         <mat-label>Robots</mat-label>
-        <mat-select [formControl]="environnements" multiple [(value)]="selected">
+        <mat-select formControlName="robots" multiple [(value)]="selected" placeholder="Select Robots" >
+        <ng-container *ngFor="let robot of (robots |async) ">
+         
+        <mat-option [value]="robot">{{robot.name}}</mat-option>
         
-          <mat-option *ngFor="let environnement of environnementList" [value]="environnement ">{{environnement}}</mat-option>
+      </ng-container>
         </mat-select>
       </mat-form-field>
 
 
 
-             <p >You selected: {{selected}}</p>
+             <p  >You selected: {{selected}}</p>
  
   
   
@@ -33,7 +36,7 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Descrition</mat-label>
-      <input matInput #message maxlength="256" placeholder="Ex. Finance process includes ...">
+      <input required  [(ngModel)]="environnement.description" matInput #message maxlength="256" placeholder="Ex. Finance process includes ...">
       <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
     </mat-form-field>
 
@@ -44,7 +47,7 @@
 
 
     <mat-dialog-actions>
-        <button class="mat-raised-button">cancel</button>
-        <button class="mat-raised-button mat-primary">create</button>
+        <button class="mat-raised-button" (click)="reset()">cancel</button>
+        <button class="mat-raised-button mat-primary"  (click)="saveEnvironnement()">create</button>
     </mat-dialog-actions>
      </div>   

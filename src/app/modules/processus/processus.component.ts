@@ -5,25 +5,9 @@ import { MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdialog.component';
 import { MatDialog} from '@angular/material/dialog';
-
-  
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  environnement: string;
-  priority: string;
-  description: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Process1', environnement: 'ENV1',priority:'low',description:'first process'},
-  {position: 2, name: 'Process2', environnement: 'ENV1',priority:'low',description:' process test'},
-  {position: 3, name: 'Process3', environnement: 'ENV1',priority:'high',description:''},
-  {position: 4, name: 'Process4', environnement: 'ENV1',priority:'high',description:'second process'},
-  {position: 5, name: 'Process5', environnement: 'ENV1',priority:'low',description:' process1.1.0'},
-  {position: 6, name: 'Process6', environnement: 'ENV1',priority:'low',description:'third process'},
-  {position: 7, name: 'Process7', environnement: 'ENV1',priority:'high',description:'My process'},
-]; 
+import { Process } from './process';
+import { ProcessService } from 'src/app/services/process.service';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-processus',
@@ -31,9 +15,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./processus.component.css']
 })
 export class ProcessusComponent implements OnInit {
+  ProcessData: any = [];
   displayedColumns: string[] = ['select', 'position', 'name', 'environnement', 'priority','description', 'actions'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  dataSource : MatTableDataSource<Process>;
+  selection = new SelectionModel<Process>(true, []);
   selectedRow: any;
    
 
@@ -44,17 +29,38 @@ export class ProcessusComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  
+  @ViewChild('filter') filter: ElementRef; 
     
-  constructor(public dialog:MatDialog) {}
+  constructor(public dialog:MatDialog, private processService : ProcessService) {}
     
   
   ngOnInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.processService.getAllProcess().subscribe(
+      (data => {
+        this.ProcessData = data;
+        this.dataSource = new MatTableDataSource<Process>(this.ProcessData);
+       
+      })
+      )
+  
   }
+  deleteprocess(id:number){
+   
+    if(confirm('Are you sure to delete??'))
+    {this.processService.deleteProcess(id).subscribe
+      (data =>{
+      this.dataSource = new MatTableDataSource<Process>(this.ProcessData);
+     
+    
+    });
+    
+    }
+   }
 
-
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -78,7 +84,7 @@ masterToggle() {
 }
 
 /** The label for the checkbox on the passed row */
-checkboxLabel(row?: PeriodicElement): string {
+checkboxLabel(row?: Process): string {
   if (!row) {
     return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
   }
@@ -87,10 +93,20 @@ checkboxLabel(row?: PeriodicElement): string {
 
 openDialog(){
   
- this.dialog.open(ProcessdialogComponent);
+  this.dialog.open(ProcessdialogComponent).afterClosed()
+  .subscribe(() => this.refreshParent());
 
 }
 
+getProcess(){
+this.ProcessData= this.processService.getAllProcess();
+
+}
+refreshParent(){
+  this.dialog.afterAllClosed
+    .subscribe(() => 
+    this.getProcess());
+}
 }
   
 

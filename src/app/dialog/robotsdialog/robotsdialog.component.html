@@ -13,25 +13,25 @@
 
             <mat-form-field appearance="fill">
               <mat-label>Adress ip</mat-label>
-              <input matInput placeholder="Adress ip" formControlName="firstCtrl" required>
+              <input matInput placeholder="Adress ip" formControlName="firstCtrl" required [(ngModel)]="robot.ipAddress">
             </mat-form-field>
 
 
             <mat-form-field appearance="fill">
                 <mat-label>Port</mat-label>
-                <input matInput placeholder="Port" formControlName="firstCtrl" required>
+                <input matInput placeholder="Port" formControlName="firstCtrl" required [(ngModel)]="robot.port">
               </mat-form-field>
 
 
               <mat-form-field appearance="fill">
                 <mat-label>Domain/username</mat-label>
-                <input matInput placeholder="Domain/username" formControlName="firstCtrl" required>
+                <input matInput placeholder="Domain/username" formControlName="firstCtrl" required  [(ngModel)]="robot.domain">
               </mat-form-field>
 
 
               <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'"    formControlName="firstCtrl" required>
+                <input matInput [type]="hide ? 'password' : 'text'"    formControlName="firstCtrl" required  [(ngModel)]="robot.psw">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
@@ -54,29 +54,20 @@
             <mat-form-field appearance="fill">
               <mat-label>Robot name</mat-label>
               <input matInput placeholder="Robot name" formControlName="secondCtrl"
-                     required>
+                     required  [(ngModel)]="robot.name">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Description</mat-label>
-                <input matInput #message maxlength="256" placeholder="Ex. Finance process includes ...">
+                <input matInput  [(ngModel)]="robot.description" formControlName="secondCtrl" #message maxlength="256" placeholder="Ex. Finance process includes ...">
                 <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
               </mat-form-field>
             <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
+              <button mat-button (click)="stepper.reset()">Back</button>
+              <button mat-button (click)="saveRobot()" [mat-dialog-close]>submit</button>
             </div>
           </form>
         </mat-step>
-        <mat-step>
-          <mat-progress-bar mode="query"></mat-progress-bar>
-
-          <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-          </div>
-        </mat-step>
+        
       </mat-stepper>
     </mat-dialog-content> 
   

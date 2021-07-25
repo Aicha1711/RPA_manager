@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl,Validators} from '@angular/forms';
-
+import {FormBuilder, FormControl,Validators} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { Environnement } from 'src/app/modules/environnements/environnement';
+import { EnvironnementService } from 'src/app/services/environnement.service';
+import { Robot } from 'src/app/modules/robots/robot';
+import { Observable } from 'rxjs';
+import { RobotsService } from 'src/app/services/robots.service';
 @Component({
   selector: 'app-environnementdialog',
   templateUrl: './environnementdialog.component.html',
@@ -8,20 +14,42 @@ import {FormControl,Validators} from '@angular/forms';
 })
 export class EnvironnementdialogComponent implements OnInit {
 
-  srcResult:any;
+  environnement : Environnement = new Environnement();
   selected ='No robot selected';
-  environnements = new FormControl();
-  environnementList: string[] = ['Robot1', 'Robot2', 'Robot3', 'Robot4', 'Robot5', 'Robot6'];
+  /* environnements = new FormControl(); */
+ /*  environnementList: string[] = ['Robot1', 'Robot2', 'Robot3']; */
+  srcResult: any;
+  
 
-  constructor() {
+  constructor(private matDialog: MatDialog,private environnementService: EnvironnementService, private _formBuilder: FormBuilder, private router:Router,private robotService: RobotsService) {
     
    }
+  form = this._formBuilder.group({
+   robots : ['',Validators.required]
 
-  ngOnInit(): void {}
+  })
+  robots : Observable<Robot[]>;
 
+  
+  ngOnInit(){
+    this.robots=this.robotService.getRobots();
+  }
 
+ 
+  saveEnvironnement() {
+    this.environnementService.createEnvironnement(this.environnement).subscribe( data =>{
+        console.log(data);
+        this.matDialog.closeAll();
+      },
+      error => console.log(error));
+    }
 
-  selectFormControl = new FormControl('', Validators.required);
+    onSubmit(){
+      console.log(this.environnement),
+      this.saveEnvironnement();
+    }
+
+/*   selectFormControl = new FormControl('', Validators.required);
   onFileSelected() {
     const inputNode: any = document.querySelector('#file');
   
@@ -34,5 +62,6 @@ export class EnvironnementdialogComponent implements OnInit {
   
       reader.readAsArrayBuffer(inputNode.files[0]);
     }
-  }
+  } */
+  reset(){}
 }

@@ -15,4 +15,23 @@ export class RobotsService {
     return this.http.get<Robot[]>("http://localhost:8080/robots");
   }
 
+  createRobot(robot:Robot): Observable<Robot>{
+    return this.http.post<Robot>("http://localhost:8080/robots",robot);
+  }
+ 
+  editRobot(robot:Robot): Observable<Robot>{
+    return this.http.put<Robot>("http://localhost:8080/robots",robot);
+  }
+ 
+  deleteRobot(id:number): Observable<Object>{
+    return this.http.delete("http://localhost:8080/robots/"+id);
+  }
+
+  deleteallRobots(): Observable<any>{
+
+      return this.http.delete("http://localhost:8080/robots");
+  }
+
+
+
 }
