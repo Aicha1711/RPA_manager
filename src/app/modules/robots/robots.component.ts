@@ -10,7 +10,7 @@ import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/d
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
-
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -37,13 +37,14 @@ export class RobotsComponent implements OnInit {
   constructor(private route: ActivatedRoute,private robotService: RobotsService, public dialog: MatDialog,  private changeDetectorRefs: ChangeDetectorRef) {}
 
   ngOnInit() {
-     this.robotService.getRobots().subscribe(
+     /*this.robotService.getRobots().subscribe(
       (data => {
         this.RobotData = data;
         this.dataSource = new MatTableDataSource<Robot>(this.RobotData);
        
       })
-      )
+      )*/
+      this.getAllRobots();
       
   }
  
@@ -52,16 +53,67 @@ export class RobotsComponent implements OnInit {
   
 
   deleterobot(id:number){
+
+
+  
+          Swal.fire({
+            title: 'Are you sure to delete??',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: `Oui`,
+            denyButtonText: `Non`,
+            customClass: {
+              confirmButton: 'btn btn-success'
+            }
+          }).then((result) => {
+
+            if (result.isConfirmed) {
+
+              let timerInterval:any;
+Swal.fire({
+  title: 'Auto close alert!',
+  html: 'I will close in <b></b> milliseconds.',
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    timerInterval = setInterval(() => {
+      const content = Swal.getHtmlContainer()
+      if (content) {
+        const b = content.querySelector('b')
+        if (b) {
+          Swal.getTimerLeft()
+        }
+      }
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  
+  if (result.dismiss === Swal.DismissReason.timer) {
+    Swal.fire('Succès', 'deleted ', 'success')
+    .then((res)=>{
+      if (res.isConfirmed) {
+        this.deleteRobotById(id);
+      
+      }
+    })
+  }
+})
+            } 
+          })
    
-    if(confirm('Are you sure to delete??'))
+   /* if(confirm('Are you sure to delete??'))
     {this.robotService.deleteRobot(id).subscribe
       (data =>{
       this.dataSource = new MatTableDataSource<Robot>(this.RobotData);
-     
+      this.getAllRobots();
     
     });
-    
-    }
+  
+    }*/
    }
 
 
@@ -113,7 +165,17 @@ export class RobotsComponent implements OnInit {
 
  openDialog() {
      this.dialog.open(RobotsdialogComponent).afterClosed()
-      .subscribe(() => this.refreshParent());
+     // .subscribe(() => this.refreshParent());
+     .subscribe(()=>{
+     this.getAllRobots();
+     Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'new Robot',
+      showConfirmButton: false,
+      timer: 3000
+    })
+     })
      }
 
   refreshParent(){
@@ -121,6 +183,26 @@ export class RobotsComponent implements OnInit {
       .subscribe(() => 
       this.getrobot());
   } 
+
+  getAllRobots(){
+    this.robotService.getRobots().subscribe(
+      (data => {
+        console.log(data)
+        this.RobotData = data;
+        this.dataSource = new MatTableDataSource<Robot>(this.RobotData);
+       
+      })
+      )
+  }
+
+  deleteRobotById(id:number){
+    this.robotService.deleteRobot(id).subscribe
+      (data =>{
+      this.dataSource = new MatTableDataSource<Robot>(this.RobotData);
+      this.getAllRobots();
+    
+    });
+  }
 
  
   

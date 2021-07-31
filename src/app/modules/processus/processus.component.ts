@@ -102,6 +102,7 @@ getProcess(){
 this.ProcessData= this.processService.getAllProcess();
 
 }
+
 refreshParent(){
   this.dialog.afterAllClosed
     .subscribe(() => 

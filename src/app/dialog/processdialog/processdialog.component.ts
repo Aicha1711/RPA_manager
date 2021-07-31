@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Environnement } from 'src/app/modules/environnements/environnement';
 import { Process } from 'src/app/modules/processus/process';
 import { EnvironnementService } from 'src/app/services/environnement.service';
+import { PackagesService } from 'src/app/services/packages.service';
 import { ProcessService } from 'src/app/services/process.service';
 
 @Component({
@@ -20,18 +21,21 @@ process : Process = new Process();
 
   srcResult:any;
 
-  constructor(private matDialog: MatDialog, private processService: ProcessService , private _formBuilder: FormBuilder, private router:Router,private environnementService: EnvironnementService ) { }
+  constructor(private matDialog: MatDialog, private processService: ProcessService , private _formBuilder: FormBuilder, private router:Router,private environnementService: EnvironnementService, private packageService : PackagesService ) { }
   
   
   form = this._formBuilder.group({
-    environnements : ['',Validators.required]
+    environnements : ['',Validators.required],
+    fileInfos: ['',Validators.required]
  
    })
 
    environnements : Observable<Environnement[]>;
+   fileInfos?: Observable<any>;
 
   ngOnInit(){
     this.environnements =this.environnementService.getAllEnvironnements();
+    this.fileInfos = this.packageService.getFiles();
   }
 
 
@@ -49,7 +53,7 @@ process : Process = new Process();
     }
 
 
- 
+/*  
   
   onFileSelected() {
     const inputNode: any = document.querySelector('#file');
@@ -63,6 +67,6 @@ process : Process = new Process();
   
       reader.readAsArrayBuffer(inputNode.files[0]);
     }
-  } 
+  }  */
 
 }

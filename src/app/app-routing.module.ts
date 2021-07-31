@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
+import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { EnvironnementsComponent } from './modules/environnements/environnements.component';
 import { JobsComponent } from './modules/jobs/jobs.component';
@@ -21,6 +22,7 @@ const routes: Routes =
                  { path:'processus',component:ProcessusComponent},
                  { path:'jobs',component:JobsComponent}],
     },
+    {path:'login', component: LoginComponent},
 
    {
       path:'**',

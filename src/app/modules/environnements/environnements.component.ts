@@ -50,6 +50,7 @@ export class EnvironnementsComponent implements OnInit {
     {this.environnementService.deleteEnvironnement(id).subscribe
       (data =>{
       this.dataSource = new MatTableDataSource<Environnement>(this.EnvironnementData);
+      
      
     
     });

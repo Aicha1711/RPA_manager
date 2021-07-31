@@ -41,6 +41,7 @@ export class RobotsdialogComponent implements OnInit {
 
   
   saveRobot() {
+    
     this.robotService.createRobot(this.robot).subscribe( data =>{
         console.log(data);
         this.matDialog.closeAll();
