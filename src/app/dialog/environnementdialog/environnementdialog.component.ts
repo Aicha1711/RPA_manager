@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl,Validators} from '@angular/forms';
+import {FormBuilder, FormControl,FormGroup,Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Environnement } from 'src/app/modules/environnements/environnement';
@@ -14,6 +14,7 @@ import { RobotsService } from 'src/app/services/robots.service';
 })
 export class EnvironnementdialogComponent implements OnInit {
 
+  formEnv: FormGroup;
   environnement : Environnement = new Environnement();
   selected ='No robot selected';
   /* environnements = new FormControl(); */
@@ -32,22 +33,36 @@ export class EnvironnementdialogComponent implements OnInit {
 
   
   ngOnInit(){
+    this.formEnv  = this._formBuilder.group({
+      robot_id : ['',Validators.required],
+      description:['',Validators.required],
+      name:['',Validators.required]
+   
+     })
     this.robots=this.robotService.getRobots();
+  }
+
+  onSubmit(){
+    console.log(this.formEnv.value)
+    this.environnementService.createEnvironnement(this.formEnv.value).subscribe( data =>{
+      console.log(data);
+      this.matDialog.closeAll();
+    },
+    error => console.log(error));
   }
 
  
   saveEnvironnement() {
-    this.environnementService.createEnvironnement(this.environnement).subscribe( data =>{
+
+console.log(this.environnement)
+   /* this.environnementService.createEnvironnement(this.environnement).subscribe( data =>{
         console.log(data);
         this.matDialog.closeAll();
       },
-      error => console.log(error));
+      error => console.log(error));*/
     }
 
-    onSubmit(){
-      console.log(this.environnement),
-      this.saveEnvironnement();
-    }
+    
 
 /*   selectFormControl = new FormControl('', Validators.required);
   onFileSelected() {

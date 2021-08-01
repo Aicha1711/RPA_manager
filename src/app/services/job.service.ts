@@ -12,8 +12,8 @@ export class JobService {
 
     constructor(private http: HttpClient) { }
   
-  runProcess() : Observable<Process[]>{
-    return this.http.get<Process[]>("http://localhost:8080/jobs");
+  runProcess(process_id:number) : Observable<Process[]>{
+    return this.http.get<Process[]>("http://localhost:8080/jobs/"+process_id);
   }
 
    }

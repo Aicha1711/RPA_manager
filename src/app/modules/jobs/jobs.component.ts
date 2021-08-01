@@ -53,8 +53,9 @@ export class JobsComponent implements OnInit {
     
     }
    }
-   runProcess(){
-     this.jobService.runProcess().subscribe(
+   runProcess(process_id:number){
+     console.log(JSON.stringify(process_id))
+     this.jobService.runProcess(process_id).subscribe(
        data => {
         this.dataSource = new MatTableDataSource<Process>(this.ProcessData);
 

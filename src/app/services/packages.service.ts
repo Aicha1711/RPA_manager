@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { FileDB } from '../modules/posts/file-db';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,8 @@ export class PackagesService {
     return this.http.request(req);
   }
 
-  getFiles(): Observable<any> {
-    return this.http.get('http://localhost:8080/posts');
+  getFiles(): Observable<FileDB[]> {
+    return this.http.get<FileDB[]>('http://localhost:8080/posts');
   }
  
 }

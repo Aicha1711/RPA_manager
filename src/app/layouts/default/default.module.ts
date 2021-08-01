@@ -29,7 +29,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatListModule } from '@angular/material/list';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { HighchartsChartModule } from 'highcharts-angular';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -70,7 +71,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCardModule,
     MatProgressBarModule,
     MatListModule,  
-    MatSnackBarModule  
+    MatSnackBarModule ,
+    HighchartsChartModule,
+    FlexLayoutModule,
+    MatCardModule
   
   
   ],

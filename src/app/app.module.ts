@@ -6,12 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './layouts/default/default.module';
 import { DeleterobotComponent } from './confirm/deleterobot/deleterobot.component';
 import { LoginComponent } from './login/login.component';
-
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './interceptor/token.interceptor';
+import { TokenInterceptor } from './interceptor/token.interceptor';import { AreaComponent } from './shared/widgets/area/area.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+
+
+
 
 
 
@@ -21,11 +23,9 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     AppComponent,
     DeleterobotComponent,
     LoginComponent,
+ 
+ 
 
-   
-    
-  
-  
   ],
   imports: [
     BrowserModule,
@@ -34,6 +34,7 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     DefaultModule, 
     ReactiveFormsModule,
     FormsModule,
+    HighchartsChartModule
    
    
   ],

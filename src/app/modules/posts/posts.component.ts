@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PackagesService } from 'src/app/services/packages.service';
+import { FileDB } from './file-db';
 
 @Component({
   selector: 'app-posts',
@@ -15,7 +16,7 @@ export class PostsComponent implements OnInit {
   message = '';
 
   fileName = 'Select File';
-  fileInfos?: Observable<any>;
+  fileInfos?: Observable<FileDB[]>;
 
 
 

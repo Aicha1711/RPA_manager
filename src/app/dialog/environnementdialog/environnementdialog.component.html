@@ -1,3 +1,4 @@
+<form [formGroup]="formEnv" (ngSubmit)="onSubmit()">
 <div class="modal-process">
     <mat-card>Create Environnement</mat-card>
   <mat-divider></mat-divider>
@@ -9,15 +10,15 @@
     
     <mat-form-field>
       <input matInput
-              placeholder="Environnement Name"  required  [(ngModel)]="environnement.name">
+              placeholder="Environnement Name"  required  formControlName="name">
       </mat-form-field>
   
       <mat-form-field appearance="fill">
         <mat-label>Robots</mat-label>
-        <mat-select formControlName="robots" multiple [(value)]="selected" placeholder="Select Robots" >
+        <mat-select formControlName="robot_id" multiple [(value)]="selected" placeholder="Select Robots" >
         <ng-container *ngFor="let robot of (robots |async) ">
          
-        <mat-option [value]="robot">{{robot.name}}</mat-option>
+        <mat-option [value]="robot.id">{{robot.name}}</mat-option>
         
       </ng-container>
         </mat-select>
@@ -25,7 +26,7 @@
 
 
 
-             <p  >You selected: {{selected}}</p>
+            
  
   
   
@@ -36,7 +37,7 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Descrition</mat-label>
-      <input required  [(ngModel)]="environnement.description" matInput #message maxlength="256" placeholder="Ex. Finance process includes ...">
+      <input required formControlName="description"  matInput #message maxlength="256" placeholder="Ex. Finance process includes ...">
       <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
     </mat-form-field>
 
@@ -51,3 +52,5 @@
         <button class="mat-raised-button mat-primary"  (click)="saveEnvironnement()">create</button>
     </mat-dialog-actions>
      </div>   
+
+    </form>

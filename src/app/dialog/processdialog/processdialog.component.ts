@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl,Validators} from '@angular/forms';
+import {FormBuilder, FormControl,FormGroup,Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Environnement } from 'src/app/modules/environnements/environnement';
+import { FileDB } from 'src/app/modules/posts/file-db';
 import { Process } from 'src/app/modules/processus/process';
 import { EnvironnementService } from 'src/app/services/environnement.service';
 import { PackagesService } from 'src/app/services/packages.service';
@@ -16,8 +17,11 @@ import { ProcessService } from 'src/app/services/process.service';
 })
 
 export class ProcessdialogComponent implements OnInit {
+
+  forms: FormGroup;
   
 process : Process = new Process();
+
 
   srcResult:any;
 
@@ -31,25 +35,33 @@ process : Process = new Process();
    })
 
    environnements : Observable<Environnement[]>;
-   fileInfos?: Observable<any>;
+   fileInfos: Observable<FileDB[]>;
 
   ngOnInit(){
+    this.forms = this._formBuilder.group({
+      name:['',Validators.required],
+      description: ['',Validators.required],
+      priority:['',Validators.required],
+      environnements_id : ['',Validators.required],
+      fileName: ['',Validators.required],
+   
+     })
     this.environnements =this.environnementService.getAllEnvironnements();
     this.fileInfos = this.packageService.getFiles();
   }
 
 
   saveProcess() {
-    this.processService.createProcess(this.process).subscribe( data =>{
-        console.log(data);
-        this.matDialog.closeAll();
-      },
-      error => console.log(error));
+  
     }
 
     onSubmit(){
-      console.log(this.process),
-      this.saveProcess();
+      console.log(this.forms.value)
+      this.processService.createProcess(this.forms.value).subscribe( data =>{
+          console.log(data);
+          this.matDialog.closeAll();
+        },
+        error => console.log(error));
     }
 
 

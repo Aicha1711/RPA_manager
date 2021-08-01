@@ -40,7 +40,7 @@
   <mat-card-content>
     <mat-list role="list">
       <mat-list-item role="listitem" *ngFor="let file of fileInfos | async">
-        <a href="{{ file.url }}">{{ file.name }}</a>
+        {{ file.name }}
       </mat-list-item>
     </mat-list>
   </mat-card-content>

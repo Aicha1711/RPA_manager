@@ -35,13 +35,7 @@ export class ProcessusComponent implements OnInit {
     
   
   ngOnInit() {
-    this.processService.getAllProcess().subscribe(
-      (data => {
-        this.ProcessData = data;
-        this.dataSource = new MatTableDataSource<Process>(this.ProcessData);
-       
-      })
-      )
+   this.getAllProcess();
   
   }
   deleteprocess(id:number){
@@ -94,7 +88,7 @@ checkboxLabel(row?: Process): string {
 openDialog(){
   
   this.dialog.open(ProcessdialogComponent).afterClosed()
-  .subscribe(() => this.refreshParent());
+  .subscribe(() => this.getAllProcess());
 
 }
 
@@ -107,6 +101,16 @@ refreshParent(){
   this.dialog.afterAllClosed
     .subscribe(() => 
     this.getProcess());
+}
+
+getAllProcess(){
+  this.processService.getAllProcess().subscribe(
+    (data => {
+      this.ProcessData = data;
+      this.dataSource = new MatTableDataSource<Process>(this.ProcessData);
+     
+    })
+    )
 }
 }
   
