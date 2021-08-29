@@ -36,7 +36,7 @@
                 <!-- Saisie priority -->
     <mat-form-field appearance="fill" class="select-priority">
       <mat-label>Select the priority</mat-label>
-      <mat-select formControlName="priority" ng-options="boolToStr(item) for item in [true, false]">
+      <mat-select formControlName="priority" ng-options="boolToStr(item) for item in [low, high]">
         <mat-option value="false">low</mat-option>
         <mat-option value="true">high</mat-option>
       </mat-select>

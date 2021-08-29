@@ -8,6 +8,7 @@ import { MatDialog} from '@angular/material/dialog';
 import { Process } from './process';
 import { ProcessService } from 'src/app/services/process.service';
 import { ElementRef } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-processus',
@@ -38,19 +39,6 @@ export class ProcessusComponent implements OnInit {
    this.getAllProcess();
   
   }
-  deleteprocess(id:number){
-   
-    if(confirm('Are you sure to delete??'))
-    {this.processService.deleteProcess(id).subscribe
-      (data =>{
-      this.dataSource = new MatTableDataSource<Process>(this.ProcessData);
-     
-    
-    });
-    
-    }
-   }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -66,15 +54,13 @@ export class ProcessusComponent implements OnInit {
   const numRows = this.dataSource.data.length;
   return numSelected === numRows;
 }
-
 /** Selects all rows if they are not all selected; otherwise clear selection. */
 masterToggle() {
   if (this.isAllSelected()) {
     this.selection.clear();
     return;
   }
-
-  this.selection.select(...this.dataSource.data);
+    this.selection.select(...this.dataSource.data);
 }
 
 /** The label for the checkbox on the passed row */
@@ -84,18 +70,88 @@ checkboxLabel(row?: Process): string {
   }
   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
 }
+getProcess(){
+  this.ProcessData= this.processService.getAllProcess();
+  
+  }
+  
+  deleteprocess(id:number){
+    Swal.fire({
+      title: 'Are you sure to delete??',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: `Oui`,
+      denyButtonText: `Non`,
+      customClass: {
+        confirmButton: 'btn btn-success'
+      }
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+
+        let timerInterval:any;
+Swal.fire({
+title: 'Auto close alert!',
+html: 'I will close in <b></b> milliseconds.',
+timer: 2000,
+timerProgressBar: true,
+didOpen: () => {
+Swal.showLoading()
+timerInterval = setInterval(() => {
+const content = Swal.getHtmlContainer()
+if (content) {
+  const b = content.querySelector('b')
+  if (b) {
+    Swal.getTimerLeft()
+  }
+}
+}, 100)
+},
+willClose: () => {
+clearInterval(timerInterval)
+}
+}).then((result) => {
+
+if (result.dismiss === Swal.DismissReason.timer) {
+Swal.fire('Succès', 'deleted ', 'success')
+.then((res)=>{
+if (res.isConfirmed) {
+  this.deleteprocessbyid(id);
+
+}
+})
+}
+})
+      } 
+    })
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 openDialog(){
-  
   this.dialog.open(ProcessdialogComponent).afterClosed()
-  .subscribe(() => this.getAllProcess());
-
+  //.subscribe(() => this.getAllProcess());
+  .subscribe(()=>{
+    this.getAllProcess();
+    Swal.fire({
+     position: 'top-end',
+     icon: 'success',
+     title: 'new Process',
+     showConfirmButton: false,
+     timer: 3000
+   })
+    })
 }
 
-getProcess(){
-this.ProcessData= this.processService.getAllProcess();
 
-}
 
 refreshParent(){
   this.dialog.afterAllClosed
@@ -112,6 +168,14 @@ getAllProcess(){
     })
     )
 }
+deleteprocessbyid(id:number){
+  this.processService.deleteProcess(id).subscribe
+    (data =>{
+    this.dataSource = new MatTableDataSource<Process>(this.ProcessData);
+   this.getAllProcess();
+  });
+}
+
 }
   
 

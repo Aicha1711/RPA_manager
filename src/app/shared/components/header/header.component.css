@@ -2,3 +2,16 @@ ul li{
     list-style: none;
 
 }
+.img{
+    height : 10px;
+    width : 10px;
+
+
+}
+.logo img {
+    float: left;
+    width: 65px;
+    height: 65px;
+    padding-top: 1px;
+    
+  }

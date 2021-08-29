@@ -20,6 +20,9 @@ import { MatIconModule} from '@angular/material/icon';
 import { MatDividerModule} from '@angular/material/divider';
 import { MatStepperModule} from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { RobotUpdateComponent } from './update/robot-update/robot-update.component';
+import { EnvUpdateComponent } from './update/env-update/env-update.component';
+import { ProcessUpdateComponent } from './update/process-update/process-update.component';
 
 
 
@@ -38,6 +41,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     EnvironnementdialogComponent,
     PostsdialogComponent,
     RobotsdialogComponent,
+    RobotUpdateComponent,
+    EnvUpdateComponent,
+    ProcessUpdateComponent,
     
   ],
   imports: [
@@ -68,7 +74,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     JobsdialogComponent,
     EnvironnementdialogComponent,
     PostsdialogComponent,
-    RobotsdialogComponent
+    RobotsdialogComponent,
+    RobotUpdateComponent,
+    EnvUpdateComponent,
+    ProcessUpdateComponent,
   ]
 
   

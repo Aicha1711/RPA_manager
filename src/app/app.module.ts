@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './layouts/default/default.module';
-import { DeleterobotComponent } from './confirm/deleterobot/deleterobot.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
@@ -17,12 +16,13 @@ import { HighchartsChartModule } from 'highcharts-angular';
 
 
 
+
   
 @NgModule({
   declarations: [
     AppComponent,
-    DeleterobotComponent,
-    LoginComponent,
+   LoginComponent,
+  
  
  
 

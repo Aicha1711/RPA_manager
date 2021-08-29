@@ -19,8 +19,8 @@ export class RobotsService {
     return this.http.post<Robot>("http://localhost:8080/robots",robot);
   }
  
-  editRobot(robot:Robot): Observable<Robot>{
-    return this.http.put<Robot>("http://localhost:8080/robots",robot);
+  editRobot(id : number, robot:Robot): Observable<Robot>{
+    return this.http.put<Robot>("http://localhost:8080/robots/"+id,robot);
   }
  
   deleteRobot(id:number): Observable<Object>{

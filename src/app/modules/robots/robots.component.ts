@@ -27,8 +27,6 @@ export class RobotsComponent implements OnInit {
   dataSource: MatTableDataSource<Robot>;
   selection = new SelectionModel<Robot>(true, []);
 
-
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
  @ViewChild('filter') filter: ElementRef; 
@@ -37,26 +35,56 @@ export class RobotsComponent implements OnInit {
   constructor(private route: ActivatedRoute,private robotService: RobotsService, public dialog: MatDialog,  private changeDetectorRefs: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.getAllRobots();
+    
      /*this.robotService.getRobots().subscribe(
       (data => {
         this.RobotData = data;
         this.dataSource = new MatTableDataSource<Robot>(this.RobotData);
-       
       })
-      )*/
-      this.getAllRobots();
-      
-  }
- 
- 
-
+    )*/}
+     
+    ngAfterViewInit() {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+   
   
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }
+  
+    /** Whether the number of selected elements matches the total number of rows. */
+    isAllSelected() {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.dataSource.data.length;
+      return numSelected === numRows;
+    }
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    masterToggle() {
+      if (this.isAllSelected()) {
+        this.selection.clear();
+        return;
+      }
+  
+      this.selection.select(...this.dataSource.data);
+    }
+    /** The label for the checkbox on the passed row */
+    checkboxLabel(row?: Robot): string {
+      if (!row) {
+        return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+      }
+      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    } 
+  getrobot(){
+    this.RobotData= this.robotService.getRobots();}
 
   deleterobot(id:number){
-
-
-  
-          Swal.fire({
+    Swal.fire({
             title: 'Are you sure to delete??',
             showDenyButton: true,
             showCancelButton: false,
@@ -116,53 +144,6 @@ Swal.fire({
     }*/
    }
 
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-      return;
-    }
-
-    this.selection.select(...this.dataSource.data);
-  }
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Robot): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  } 
-
-  getrobot(){
-    this.RobotData= this.robotService.getRobots();}
-
-
-  
-   
-
  openDialog() {
      this.dialog.open(RobotsdialogComponent).afterClosed()
      // .subscribe(() => this.refreshParent());
@@ -178,33 +159,34 @@ Swal.fire({
      })
      }
 
-  refreshParent(){
+refreshParent(){
     this.dialog.afterAllClosed
       .subscribe(() => 
       this.getrobot());
-  } 
-
-  getAllRobots(){
+} 
+//**************** Afficher la liste des robots ***************///
+getAllRobots(){
     this.robotService.getRobots().subscribe(
       (data => {
         console.log(data)
         this.RobotData = data;
         this.dataSource = new MatTableDataSource<Robot>(this.RobotData);
-       
       })
-      )
-  }
-
-  deleteRobotById(id:number){
+   )
+}
+//**************** Supprimer un robot *************************///
+deleteRobotById(id: number) {
     this.robotService.deleteRobot(id).subscribe
-      (data =>{
-      this.dataSource = new MatTableDataSource<Robot>(this.RobotData);
-      this.getAllRobots();
-    
-    });
-  }
+      (data => {
+        this.dataSource = new MatTableDataSource<Robot>(this.RobotData);
+        this.getAllRobots();
+      });
+}
 
  
-  
+updaterobot(id: number,robot: Robot){
 
+
+
+}
 }
