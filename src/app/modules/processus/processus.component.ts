@@ -3,37 +3,12 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
-  
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-
-]; 
+import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdialog.component';
+import { MatDialog} from '@angular/material/dialog';
+import { Process } from './process';
+import { ProcessService } from 'src/app/services/process.service';
+import { ElementRef } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-processus',
@@ -41,10 +16,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./processus.component.css']
 })
 export class ProcessusComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'actions'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  ProcessData: any = [];
+  displayedColumns: string[] = ['select', 'position', 'name', 'environnement', 'priority','description', 'actions'];
+  dataSource : MatTableDataSource<Process>;
+  selection = new SelectionModel<Process>(true, []);
   selectedRow: any;
+   
 
   logData(row: any){ 
     this.selectedRow = row;
@@ -53,17 +30,19 @@ export class ProcessusComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  
+  @ViewChild('filter') filter: ElementRef; 
     
-  constructor() {}
+  constructor(public dialog:MatDialog, private processService : ProcessService) {}
     
   
   ngOnInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+   this.getAllProcess();
+  
   }
-
-
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -75,24 +54,128 @@ export class ProcessusComponent implements OnInit {
   const numRows = this.dataSource.data.length;
   return numSelected === numRows;
 }
-
 /** Selects all rows if they are not all selected; otherwise clear selection. */
 masterToggle() {
   if (this.isAllSelected()) {
     this.selection.clear();
     return;
   }
-
-  this.selection.select(...this.dataSource.data);
+    this.selection.select(...this.dataSource.data);
 }
 
 /** The label for the checkbox on the passed row */
-checkboxLabel(row?: PeriodicElement): string {
+checkboxLabel(row?: Process): string {
   if (!row) {
     return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
   }
   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
 }
+getProcess(){
+  this.ProcessData= this.processService.getAllProcess();
+  
+  }
+  
+  deleteprocess(id:number){
+    Swal.fire({
+      title: 'Are you sure to delete??',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: `Oui`,
+      denyButtonText: `Non`,
+      customClass: {
+        confirmButton: 'btn btn-success'
+      }
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+
+        let timerInterval:any;
+Swal.fire({
+title: 'Auto close alert!',
+html: 'I will close in <b></b> milliseconds.',
+timer: 2000,
+timerProgressBar: true,
+didOpen: () => {
+Swal.showLoading()
+timerInterval = setInterval(() => {
+const content = Swal.getHtmlContainer()
+if (content) {
+  const b = content.querySelector('b')
+  if (b) {
+    Swal.getTimerLeft()
+  }
+}
+}, 100)
+},
+willClose: () => {
+clearInterval(timerInterval)
+}
+}).then((result) => {
+
+if (result.dismiss === Swal.DismissReason.timer) {
+Swal.fire('Succès', 'deleted ', 'success')
+.then((res)=>{
+if (res.isConfirmed) {
+  this.deleteprocessbyid(id);
+
+}
+})
+}
+})
+      } 
+    })
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+openDialog(){
+  this.dialog.open(ProcessdialogComponent).afterClosed()
+  //.subscribe(() => this.getAllProcess());
+  .subscribe(()=>{
+    this.getAllProcess();
+    Swal.fire({
+     position: 'top-end',
+     icon: 'success',
+     title: 'new Process',
+     showConfirmButton: false,
+     timer: 3000
+   })
+    })
+}
+
+
+
+refreshParent(){
+  this.dialog.afterAllClosed
+    .subscribe(() => 
+    this.getProcess());
+}
+
+getAllProcess(){
+  this.processService.getAllProcess().subscribe(
+    (data => {
+      this.ProcessData = data;
+      this.dataSource = new MatTableDataSource<Process>(this.ProcessData);
+     
+    })
+    )
+}
+deleteprocessbyid(id:number){
+  this.processService.deleteProcess(id).subscribe
+    (data =>{
+    this.dataSource = new MatTableDataSource<Process>(this.ProcessData);
+   this.getAllProcess();
+  });
+}
+
 }
   
 

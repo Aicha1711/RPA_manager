@@ -7,11 +7,14 @@ import { JobsComponent } from './modules/jobs/jobs.component';
 import { PostsComponent } from './modules/posts/posts.component';
 import { ProcessusComponent } from './modules/processus/processus.component';
 import { RobotsComponent } from './modules/robots/robots.component';
+import { LogComponent } from './login/log/log.component';
 
 
 
 const routes: Routes = 
-[  {
+[  
+ 
+  {
       path:'',
       component: DefaultComponent,
       children: [{ path:'',component:DashboardComponent},
@@ -21,7 +24,7 @@ const routes: Routes =
                  { path:'processus',component:ProcessusComponent},
                  { path:'jobs',component:JobsComponent}],
     },
-
+  
    {
       path:'**',
       redirectTo:''}

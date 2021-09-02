@@ -9,12 +9,18 @@ th.mat-sort-header-sorted {
 
   background: cornflowerblue;
 }
+.mat-toolbar{
+  
+  padding-left: 20px;
+  color:rgb(0, 0, 0);
+  background: rgb(226, 234, 246);
 
+}
 .search-div{
   margin: 10px;
     }
     .search-form-field{
-        width: 60%;
+        width: 30%;
         margin-left: 10px;
         padding: 5px 10px;
         background-color: #f5f5f5;

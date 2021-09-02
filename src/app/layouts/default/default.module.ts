@@ -4,6 +4,7 @@ import { DefaultComponent } from './default.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/components/shared.module';
+import { DialogModule } from 'src/app/dialog/dialog.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,8 +19,23 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatCheckboxModule} from '@angular/material/checkbox';
+import { MatDialogModule} from '@angular/material/dialog';
+import { ProcessdialogComponent } from 'src/app/dialog/processdialog/processdialog.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RobotsdialogComponent } from 'src/app/dialog/robotsdialog/robotsdialog.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatListModule } from '@angular/material/list';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
+
+
+
 
  
 @NgModule({
@@ -31,12 +47,14 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     JobsComponent,
     ProcessusComponent,
     RobotsComponent,
+ 
   ],
 
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
+    DialogModule,
     MatSidenavModule,
     MatDividerModule,
     MatToolbarModule,
@@ -47,9 +65,23 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     MatSortModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule,
+    HttpClientModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatListModule,  
+    MatSnackBarModule ,
+    HighchartsChartModule,
+    FlexLayoutModule,
+    MatCardModule
+  
+  
   ],
+  
 
+
+   entryComponents:[ProcessdialogComponent,RobotsdialogComponent],
 })
 export class DefaultModule { }
 

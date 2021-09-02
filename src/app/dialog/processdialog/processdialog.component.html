@@ -1,0 +1,63 @@
+<form [formGroup]="forms" (ngSubmit)="onSubmit()">
+<div class="modal-process">
+  <mat-card>Deploy a process</mat-card>
+  <mat-divider></mat-divider>
+
+  <mat-dialog-content>
+                <!-- Saisie name -->
+    <mat-form-field>
+      <input matInput placeholder="Process Name" required formControlName="name">
+    </mat-form-field>
+
+                <!-- Saisie package -->
+    <mat-form-field appearance="standard">
+      <mat-label>Select the Package</mat-label>
+      <mat-select formControlName="files" matNativeControl required formControlName="fileName">
+        <ng-container *ngFor="let file of fileInfos | async" >
+          <mat-option [value]="file.name"> {{ file.name }}</mat-option>
+         
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+
+                <!-- Saisie Environnement -->
+
+                
+    <mat-form-field appearance="standard">
+      <mat-label>Select the Environnement</mat-label>
+      <mat-select formControlName="environnements" matNativeControl required formControlName="environnements_id">
+        <ng-container *ngFor="let environnement of (environnements |async) ">
+          <mat-option [value]="environnement.id">{{environnement.name}}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+                <!-- Saisie priority -->
+    <mat-form-field appearance="fill" class="select-priority">
+      <mat-label>Select the priority</mat-label>
+      <mat-select formControlName="priority" ng-options="boolToStr(item) for item in [low, high]">
+        <mat-option value="false">low</mat-option>
+        <mat-option value="true">high</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+                 <!-- Saisie description -->
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Descrition</mat-label>
+      <input matInput formControlName="description" #message maxlength="256"
+        placeholder="Ex. Finance process includes ...">
+      <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+    </mat-form-field>
+</mat-dialog-content>
+
+
+
+
+  <mat-dialog-actions>
+    <button class="mat-raised-button">cancel</button>
+    <button class="mat-raised-button mat-primary" (click)="saveProcess()">create</button>
+  </mat-dialog-actions>
+</div>
+</form>

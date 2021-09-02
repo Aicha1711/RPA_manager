@@ -1,0 +1,37 @@
+
+.modal-process{
+    width: 700px;;
+    height: 500px;
+   flex-wrap:wrap;
+ }
+ 
+ .mat-card{
+     padding-bottom: 30px;
+     font-size: 20px;
+     background: rgb(241, 240, 243);
+ }
+ .mat-form-field {
+     padding-top: 10px;
+     display: block;
+     font-size: 14px;}
+ 
+ .mat-dialog-actions{
+   
+     padding-left: 500px;
+ 
+ }
+ .select-priority{
+     display: inline-block;
+     
+   
+     
+     
+ }
+ 
+ .input-file{
+     padding-top: 30px;
+     padding-left: 5px;
+ }
+ .example-section {
+    margin: 12px 0;
+  }
