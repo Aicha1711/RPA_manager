@@ -11,19 +11,19 @@ export class ProcessService {
   constructor(private http: HttpClient) { }
   
   getAllProcess() : Observable<Process[]>{
-    return this.http.get<Process[]>("http://localhost:8080/process");
+    return this.http.get<Process[]>("http://localhost:8082/process");
   }
 
   createProcess(process:Process): Observable<Process>{
-    return this.http.post<Process>("http://localhost:8080/process",process);
+    return this.http.post<Process>("http://localhost:8082/process",process);
   }
  
   updateProcess(process:Process): Observable<Process>{
-    return this.http.put<Process>("http://localhost:8080/process",process);
+    return this.http.put<Process>("http://localhost:8082/process",process);
   }
  
   deleteProcess(id:number): Observable<Object>{
-    return this.http.delete("http://localhost:8080/process/"+id);
+    return this.http.delete("http://localhost:8082/process/"+id);
   }
 
 

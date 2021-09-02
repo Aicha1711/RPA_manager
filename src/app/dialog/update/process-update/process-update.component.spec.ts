@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleterobotComponent } from './deleterobot.component';
+import { ProcessUpdateComponent } from './process-update.component';
 
-describe('DeleterobotComponent', () => {
-  let component: DeleterobotComponent;
-  let fixture: ComponentFixture<DeleterobotComponent>;
+describe('ProcessUpdateComponent', () => {
+  let component: ProcessUpdateComponent;
+  let fixture: ComponentFixture<ProcessUpdateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleterobotComponent ]
+      declarations: [ ProcessUpdateComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleterobotComponent);
+    fixture = TestBed.createComponent(ProcessUpdateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

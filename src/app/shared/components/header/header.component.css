@@ -1,4 +1,20 @@
 ul li{
+    padding-top: 12px;
     list-style: none;
+    color:white;
+  
 
 }
+.img{
+    height : 10px;
+    width : 10px;
+
+
+}
+.logo img {
+    float: left;
+    width: 65px;
+    height: 65px;
+    padding-top: 1px;
+    
+  }

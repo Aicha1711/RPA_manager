@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 import { Router } from '@angular/router';
+import { KeycloackSecurityService } from 'src/app/services/keycloack-security.service';
 
 
 
@@ -12,20 +13,35 @@ export class HeaderComponent implements OnInit {
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, public securityService:KeycloackSecurityService) { }
 
   ngOnInit(): void {
   }
-
+/* 
   logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("user_id")
     this.router.navigate(['/login']);
 
-  }
+  } */
 
   toggleSideBar() {
     this.toggleSideBarForMe.emit();
    
   }
+  onLogout(){
+    this.securityService.logout();
+    
+  }
+
+  onLogin(){
+    this.securityService.login();
+  }
+
+
+  onChangePassword(){
+    this.securityService.manageAccount();
+  }
+ 
+ 
 }

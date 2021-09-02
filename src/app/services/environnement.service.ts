@@ -12,19 +12,19 @@ export class EnvironnementService {
   constructor(private http: HttpClient) { }
 
   getAllEnvironnements() : Observable<Environnement[]>{
-    return this.http.get<Environnement[]>("http://localhost:8080/environnements");
+    return this.http.get<Environnement[]>("http://localhost:8082/environnements");
   }
 
   createEnvironnement(environment:Environnement): Observable<Environnement>{
-    return this.http.post<Environnement>("http://localhost:8080/environnements",environment);
+    return this.http.post<Environnement>("http://localhost:8082/environnements",environment);
   }
  
   updateEnvironnement(environment:Environnement): Observable<Environnement>{
-    return this.http.put<Environnement>("http://localhost:8080/environnements",environment);
+    return this.http.put<Environnement>("http://localhost:8082/environnements",environment);
   }
  
   deleteEnvironnement(id:number): Observable<Object>{
-    return this.http.delete("http://localhost:8080/environnements/"+id);
+    return this.http.delete("http://localhost:8082/environnements/"+id);
   }
 
   

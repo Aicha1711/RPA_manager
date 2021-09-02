@@ -16,7 +16,7 @@ export class PackagesService {
 
     formData.append('file', file);
 
-    const req = new HttpRequest('POST','http://localhost:8080/posts', formData, {
+    const req = new HttpRequest('POST','http://localhost:8082/posts', formData, {
       reportProgress: true,
       responseType: 'json'
     });
@@ -25,7 +25,7 @@ export class PackagesService {
   }
 
   getFiles(): Observable<FileDB[]> {
-    return this.http.get<FileDB[]>('http://localhost:8080/posts');
+    return this.http.get<FileDB[]>('http://localhost:8082/posts');
   }
  
 }
