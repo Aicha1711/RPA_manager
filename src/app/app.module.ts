@@ -4,6 +4,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './layouts/default/default.module';
+<<<<<<< HEAD
+=======
+import { LoginComponent } from './login/login.component';
+>>>>>>> a84f28606cff28ce1f203a268710466f5df202ce
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { KeycloackSecurityService } from './services/keycloack-security.service';
@@ -18,13 +22,18 @@ export function kcFactory(KcSecurity:KeycloackSecurityService){
 
 
 
+
   
 @NgModule({
   declarations: [
     AppComponent,
+<<<<<<< HEAD
     LogComponent,
    
  
+=======
+   LoginComponent,
+>>>>>>> a84f28606cff28ce1f203a268710466f5df202ce
   
  
  

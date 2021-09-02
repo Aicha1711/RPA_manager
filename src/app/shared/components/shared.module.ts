@@ -24,8 +24,12 @@ import { PieComponent } from '../widgets/pie/pie.component';
     FooterComponent,
     AreaComponent,
     CardComponent,
+<<<<<<< HEAD
     PieComponent,
     
+=======
+    PieComponent
+>>>>>>> a84f28606cff28ce1f203a268710466f5df202ce
    
    
   ],
@@ -48,8 +52,12 @@ import { PieComponent } from '../widgets/pie/pie.component';
     FooterComponent,
     AreaComponent,
     CardComponent,
+<<<<<<< HEAD
     PieComponent,
    
+=======
+    PieComponent
+>>>>>>> a84f28606cff28ce1f203a268710466f5df202ce
 
  
    

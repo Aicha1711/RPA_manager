@@ -20,7 +20,11 @@ export class RobotsService {
   }
  
   editRobot(id : number, robot:Robot): Observable<Robot>{
+<<<<<<< HEAD
     return this.http.put<Robot>("http://localhost:8082/robots/"+id,robot);
+=======
+    return this.http.put<Robot>("http://localhost:8080/robots/"+id,robot);
+>>>>>>> a84f28606cff28ce1f203a268710466f5df202ce
   }
  
   deleteRobot(id:number): Observable<Object>{
